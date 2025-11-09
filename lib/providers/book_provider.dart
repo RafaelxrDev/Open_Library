@@ -12,7 +12,8 @@ class BookProvider extends ChangeNotifier {
   String? get error => _error;
 
   Future<void> search(String query) async {
-    if (query.trim().isEmpty) {
+    final term = query.trim();
+    if (term.isEmpty) {
       _books = [];
       _error = null;
       notifyListeners();
@@ -24,8 +25,11 @@ class BookProvider extends ChangeNotifier {
     notifyListeners();
 
     try {
-      final result = await ApiService.searchBooks(query);
+      final result = await ApiService.searchBooks(term);
       _books = result;
+      if (_books.isEmpty) {
+        _error = null; 
+      }
     } catch (e) {
       _error = e.toString();
       _books = [];

@@ -11,15 +11,15 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) => BookProvider()),
-      ],
+    return ChangeNotifierProvider(
+      create: (_) => BookProvider(),
       child: MaterialApp(
-        title: 'Busca de Livros - OpenLibrary',
+        title: 'OpenLibrary Finder',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          primarySwatch: Colors.blue,
+          useMaterial3: true,
+          colorSchemeSeed: Colors.deepPurple,
+          brightness: Brightness.light,
         ),
         home: const HomePage(),
       ),
